@@ -41,7 +41,7 @@ get_fw_type() {
 platform_test(){
 	local LINUX_VER=$(uname -r|awk -F"." '{print $1$2}')
 	local ARCH=$(uname -m)
-	if [ -d "/koolshare" -a -f "/usr/bin/skipd" -a "${LINUX_VER}" -ge "41" ];then
+	if [ -d "/koolshare" -a -f "/usr/bin/skipd" -a "${LINUX_VER}" -ge "26" ];then
 		echo_date 机型："${MODEL} ${FW_TYPE_NAME} 符合安装要求，开始安装插件！"
 	else
 		exit_install 1
@@ -59,7 +59,7 @@ set_skin(){
 	if [ -n "${TUF_FLAG}" ];then
 		UI_TYPE="TUF"
 	fi
-	
+
 	if [ -z "${SC_SKIN}" -o "${SC_SKIN}" != "${UI_TYPE}" ];then
 		echo_date "安装${UI_TYPE}皮肤！"
 		nvram set sc_skin="${UI_TYPE}"
@@ -116,7 +116,7 @@ install_now() {
 
 	# create ddns-go config dirctory
 	mkdir -p /koolshare/configs/lucky
-	
+
 	# remove some files first, old file should be removed, too
 	find /koolshare/init.d/ -name "*lucky*" | xargs rm -rf
 	rm -rf /koolshare/scripts/lucky*.sh 2>/dev/null
@@ -133,7 +133,7 @@ install_now() {
 	cp -rf /tmp/${module}/scripts/* /koolshare/scripts/
 	cp -rf /tmp/${module}/webs/* /koolshare/webs/
 	cp -rf /tmp/${module}/uninstall.sh /koolshare/scripts/uninstall_${module}.sh
-	
+
 	#创建开机自启任务
 	[ ! -L "/koolshare/init.d/S110lucky.sh" ] && ln -sf /koolshare/scripts/lucky_config.sh /koolshare/init.d/S110lucky.sh
 	[ ! -L "/koolshare/init.d/N110lucky.sh" ] && ln -sf /koolshare/scripts/lucky_config.sh /koolshare/init.d/N110lucky.sh

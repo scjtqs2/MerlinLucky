@@ -9,7 +9,7 @@ https://github.com/gdy666/lucky
 
 ## 机型支持
 
-在asuswrt为基础的固件上，插件目前支持HND和MTK和QCA架构的路由器
+在asuswrt为基础的固件上，插件目前支持ac68u(armv5)的路由器
 
 
 ---
